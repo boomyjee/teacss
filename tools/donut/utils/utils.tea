@@ -1,0 +1,42 @@
+@import "gradient";
+@import "css3";
+@import "ie7";
+
+.clearfix() {
+    *zoom: 1;
+    &:before,
+    &:after {
+        display: table;
+        content: "";
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.tab_focus() {
+    // Default
+    outline: thin dotted;
+    // Webkit
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+.reset_filter() {
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(enabled = false)"));
+}   
+
+.size(w,h) {
+    width: @{w}px;
+    height: @{h}px;
+}
+
+.logo(url) {
+    @ var img = image(url);
+    display: block;
+    background: url(@img.src) no-repeat 50% 50%;
+    width: @{img.width}px;
+    height: @{img.height}px;
+    text-indent: -999em;
+    @ return img;
+}

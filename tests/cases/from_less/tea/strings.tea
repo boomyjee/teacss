@@ -1,0 +1,52 @@
+#strings {
+  background-image: url("http://son-of-a-banana.com");
+  quotes: "~" "~";
+  content: "#*%:&^,)!.(~*})";
+  empty: "";
+  brackets: "{" "}";
+  escapes: "\"hello\" \\world";
+  escapes2: "\"llo";
+}
+#comments {
+  content: "/* hello */ // not-so-secret";
+}
+#single-quote {
+  quotes: "'" "'";
+  content: '""#!&""';
+  empty: '';
+  semi-colon: ';';
+}
+#escaped {
+  filter: @{"DX.Transform.MS.BS.filter(opacity=50)"};
+}
+#one-line { image: url(http://tooks.com) }
+#crazy { image: url(http://), "}", url("http://}") }
+#interpolation {
+  @ var v = '/dev';
+  url: "http://lesscss.org@{v}/image.jpg";
+
+  @ var var2 = 256;
+  url2: "http://lesscss.org/image-@{var2}.jpg";
+
+  @ var var3 = color('#456');
+  url3: "http://lesscss.org@{var3}";
+
+  @ var var4 = 'hello';
+  url4: "http://lesscss.org/@{var4}";
+
+  @ var var5 = 54.4;
+  url5: "http://lesscss.org/@{var5}";
+}
+
+// multiple calls with string interpolation
+
+.mix_mul(a) {
+    @ a = color(a);
+    color: @{a};
+}
+.mix-mul-class {
+    .mix_mul('blue');
+    .mix_mul('red');
+    .mix_mul('black');
+    .mix_mul('orange');
+}

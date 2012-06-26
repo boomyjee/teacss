@@ -1,0 +1,62 @@
+#operations {
+  color: @{add_colors('#110000','#000011','#001100')}; // #111111
+  height: @{10 / 2 + 6 - 1 * 2}px; // 9px
+  width: @{2 * 4 - 5}em; // 3em
+  .spacing {
+    height: @{10 / 2+6-1*2}px;
+    width: @{2  * 4-5}em;
+  }
+  substraction: @{20 - 10 - 5 - 5}; // 0
+  division: @{20 / 5 / 4}; // 1
+}
+
+@ var x = 4;
+@ var y = 12;
+
+.with-variables {
+  height: @{x + y}em; // 16em
+  width: @{12 + y}em; // 24em
+  size: @{5 - x}cm; // 1cm
+}
+
+.with-functions {
+  color: @{mul_colors(rgb(200, 200, 200),0.5)};
+  color: @{mul_colors(hsl(0, 50, 50),2)};
+  color: @{add_colors(rgb(10, 10, 10),hsl(0, 50, 50))};
+}
+
+@ var z = -2;
+
+.negative {
+  height: @{2 + z}px; // 0px
+  width: @{2 - z}px; // 4px
+}
+
+.shorthands {
+  padding: -1px 2px 0 -4px; //
+}
+
+.rem-dimensions {
+  font-size: @{20 / 5 + 1.5}rem; // 5.5rem
+}
+
+.colors {
+  color: #123; // #112233
+  border-color: @{add_colors('#234','#111111')}; // #334455
+  background-color: @{sub_colors('#222222','#fff')}; // #000000
+  .other {
+    color: @{mul_colors('#111',2)}; // #222222
+    border-color: @{add_colors(mul_colors('#333333',1/3),'#111')}; // #222222
+  }
+}
+
+.negations {
+    @ var v = 4;
+    variable: @{-v}px; // 4
+    variable1: @{-v + v}px; // 0
+    variable2: @{v + -v}px; // 0
+    variable3: @{v - -v}px; // 8
+    variable4: @{-v - -v}px; // 0
+    paren: -@{v}px; // -4px
+    paren2: @{-(2 + 2) * -v}px; // 16
+}

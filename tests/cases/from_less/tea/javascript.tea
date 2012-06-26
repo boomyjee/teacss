@@ -1,0 +1,27 @@
+.eval {
+    js: @{42};
+    js: @{1 + 1};
+    js: @{"\"hello world\""};
+    js: @{[1, 2, 3].join(", ")};
+    title: @{"\"node\""};
+    ternary: @{(1 + 1 == 2 ? true : false)};
+}
+.scope {
+    @ var foo = 42;
+    var: @{foo};
+    escaped: @{2 + 5 + 'px'};
+}
+.vars {
+    @ var v = 4+4;
+    width: @v;
+}
+.escape-interpol {
+    @ var world = "world";
+    width: @{"hello" + " " + world};
+}
+.arrays {
+    @ var ary = [1, 2, 3];
+    @ var ary2 =  [1, 2, 3];
+    ary: @{'"'+ary.join(', ')+'"'};
+    ary1: @{'"'+ary2.join(', ')+'"'};
+}

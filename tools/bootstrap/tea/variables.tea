@@ -1,0 +1,92 @@
+// Variables.less
+// Variables to customize the look and feel of Bootstrap
+// -----------------------------------------------------
+
+// GLOBAL VALUES
+// --------------------------------------------------
+
+// Links
+@ linkColor             = typeof linkColor=='undefined' ? '#08c' : linkColor;
+@ linkColorHover        = typeof linkColorHover=='undefined' ? darken(linkColor, 15) : linkColorHover;
+
+@ black                 = '#000';
+@ grayDarker            = '#222';
+@ grayDark              = '#333';
+@ gray                  = '#555';
+@ grayLight             = '#999';
+@ grayLighter           = '#eee';
+@ white                 = '#fff';
+
+@ blue                  = '#049cdb';
+@ blueDark              = '#0064cd';
+@ green                 = '#46a546';
+@ red                   = '#9d261d';
+@ yellow                = '#ffc40d';
+@ orange                = '#f89406';
+@ pink                  = '#c3325f';
+@ purple                = '#7a43b6';
+
+// Typography
+@ baseFontSize          = typeof baseFontSize=='undefined' ? '13px' : baseFontSize;
+@ baseFontFamily        = typeof baseFontFamily=='undefined' ? '"Helvetica Neue", Helvetica, Arial, sans-serif' : baseFontFamily;
+@ baseLineHeight        = typeof baseLineHeight=='undefined' ? '18px' : baseLineHeight;
+@ textColor             = typeof textColor=='undefined' ? grayDark : textColor;
+
+// Buttons
+@ primaryButtonBackground = linkColor;
+
+// COMPONENT VARIABLES
+// --------------------------------------------------
+
+// Z-index master list
+// Used for a bird's eye view of components dependent on the z-axis
+// Try to avoid customizing these :)
+@ zindexDropdown = 1000;
+@ zindexPopover = 1010;
+@ zindexTooltip = 1020;
+@ zindexFixedNavbar = 1030;
+@ zindexModalBackdrop = 1040;
+@ zindexModal = 1050;
+
+// Input placeholder text color
+@ placeholderText = grayLight;
+
+// Navbar
+@ navbarHeight                    = '40px';
+@ navbarBackground                = grayDarker;
+@ navbarBackgroundHighlight       = grayDark;
+
+@ navbarText                      = grayLight;
+@ navbarLinkColor                 = grayLight;
+@ navbarLinkColorHover            = white;
+
+// Form states and alerts
+@ warningText             = '#c09853';
+@ warningBackground       = '#fcf8e3';
+@ warningBorder           = darken(spin(warningBackground, -10), 3);
+
+@ errorText               = '#b94a48';
+@ errorBackground         = '#f2dede';
+@ errorBorder             = darken(spin(errorBackground, -10), 3);
+
+@ successText             = '#468847';
+@ successBackground       = '#dff0d8';
+@ successBorder           = darken(spin(successBackground, -10), 5);
+
+@ infoText                = '#3a87ad';
+@ infoBackground          = '#d9edf7';
+@ infoBorder              = darken(spin(infoBackground, -10), 7);
+
+
+
+// GRID
+// --------------------------------------------------
+// Default 940px grid
+@ gridColumns             = typeof gridColumns=='undefined' ? 12 : gridColumns;
+@ gridColumnWidth         = typeof gridColumnWidth=='undefined' ? 60 : gridColumnWidth;
+@ gridGutterWidth         = typeof gridGutterWidth=='undefined' ? 20 : gridGutterWidth;
+@ gridRowWidth            = (gridColumns * gridColumnWidth) + (gridGutterWidth * (gridColumns - 1));
+
+// Fluid grid
+@ fluidGridColumnWidth    = typeof fluidGridColumnWidth=='undefined' ? 6.382978723 : fluidGridColumnWidth;
+@ fluidGridGutterWidth    = typeof fluidGridGutterWidth=='undefined' ? 2.127659574 : fluidGridGutterWidth;

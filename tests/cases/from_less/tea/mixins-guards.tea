@@ -1,0 +1,82 @@
+// Stacking, functions..
+.light(a) {
+    @ if (lightness(a)>50)
+        color: white;
+    @ else if (lightness(a)<50)
+        color: black;
+    margin: 1px;
+}
+
+.light1 { .light('#ddd') }
+.light2 { .light('#444') }
+
+// Arguments against each other
+.max(a,b) {
+    width: @{Math.max(a,b)};
+}
+
+.max1 { .max(3, 6) }
+.max2 { .max(8, 1) }
+
+// Globals inside guards
+
+@ var g = 'auto';
+
+.glob(a) {
+    @ if (a==g)
+        margin: @a @g;
+}
+.glob1 { .glob('auto') }
+
+// Other operators
+
+.ops(a) {
+    @ if (a >= 0)
+        height: gt-or-eq;
+    @ if (a <= 0)
+      height: lt-or-eq;
+    @ if (a!=0)
+        height: not-eq;
+}
+.ops1 { .ops(0) }
+.ops2 { .ops(1) }
+.ops3 { .ops(-1) }
+
+// Scope and default values
+
+@ var a = 'auto';
+.default_mixin(a) {
+    @ a = a || 'inherit';
+    @ if (a=='inherit')
+        content: default;
+}
+.default1 { .default_mixin() }
+
+// true & false keywords
+.test(a) {
+    @ if (a===true) {
+        content: "true.";
+    @ } else {
+        content: "false.";
+    @ }
+}
+
+.test1 { .test(true) }
+.test2 { .test(false) }
+.test3 { .test(1) }
+.test4 { .test(this.boo) }
+.test5 { .test("true") }
+
+// Boolean expressions
+.bool1 {
+    // no real need to test this ones
+    content: true and true;
+    content: true;
+    content: false, true;
+    content: false and true and true, true;
+    content: false, true and true;
+    content: false, false, true;
+    content: false, true and true and true, false;
+    content: not false;
+    content: not false and false, not false;
+}

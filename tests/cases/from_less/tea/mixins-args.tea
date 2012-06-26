@@ -1,0 +1,142 @@
+.mixin(a,b) {
+    @ a = a || '1px';
+    @ b = b || '50%';
+    width: @{parseFloat(a) * 5}px;
+    height: @{parseFloat(b) - 1}%;
+}
+
+.mixina(style,width,color) {
+    @ color = color || '#000000';
+    border: @width @style @color;
+}
+
+.mixiny(a,b) {
+    @ a = a || 0; b = b || 0;
+    margin: @a;
+    padding: @b;
+}
+
+.hidden() {
+    color: transparent; // asd
+}
+
+#hidden {
+    .hidden();
+}
+
+#hidden1 {
+    .hidden();
+}
+
+.two-args {
+    color: blue;
+    .mixin('2px', '100%');
+    .mixina('dotted', '2px');
+}
+
+.one-arg {
+    .mixin('3px');
+}
+
+.no-parens {
+    .mixin();
+}
+
+.no-args {
+    .mixin();
+}
+
+.var-args {
+    @ var v = 9;
+    .mixin(v, v * 2);
+}
+
+.multi-mix {
+    .mixin('2px', '30%');
+    .mixiny(4, 5);
+}
+
+.maxa(arg1, arg2) {
+    @ arg1 = arg1 || 10;
+    @ arg2 = arg2 || '#ff0000';
+    padding: @{arg1 * 2}px;
+    color: @arg2;
+}
+
+body {
+    .maxa(15);
+}
+
+@ var glob = 5;
+
+.global_mixin(a) {
+    @ a = a || 2;
+    width: @{glob + a};
+}
+
+.scope-mix {
+    .global_mixin(3);
+}
+
+.nested_ruleset(width) {
+    @ width = width || '200px';
+    width: @width;
+    .column { margin: @width; }
+}
+.content {
+    .nested_ruleset('600px');
+}
+
+//
+
+.same_var_name2(radius) {
+    radius: @radius;
+}
+.same_var_name(radius) {
+    .same_var_name2(radius);
+}
+#same-var-name {
+    .same_var_name('5px');
+}
+
+//
+
+.var_inside() {
+    @ var v = '10px';
+    width: @v;
+}
+#var-inside { .var_inside(); }
+
+.mixin_arguments(width) {
+    @ width = width || '0px';
+    @ var args = Array.prototype.slice.call(arguments);
+    @ args[0] = width;
+    border: @{args.join(' ')};
+    width: @width;
+}
+
+.arguments {
+    .mixin_arguments('1px', 'solid', '#000000');
+}
+.arguments2 {
+    .mixin_arguments();
+}
+.arguments3 {
+    .mixin_arguments();
+}
+
+.mixin_arguments2(width) {
+    @ var args = Array.prototype.slice.call(arguments);
+    border: @{args.join(' ')};
+    rest: @{args.slice(1).join(' ')};
+    width: @width;
+}
+.arguments4 {
+    .mixin_arguments2(0, 1, 2, 3, 4);
+}
+
+// Edge cases
+
+.edge-case {
+    .mixin_arguments("[");
+}

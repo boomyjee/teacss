@@ -1,0 +1,25 @@
+@ var scope = {};
+@ var v = '99px';
+.scope.mixin() {
+    width: @v;
+}
+
+.class {
+    .scope.mixin();
+}
+
+.overwrite {
+    @ var v = '0px';
+    .scope.mixin();
+}
+
+.nested {
+    @ var v = '5px';
+    .mixin() {
+        width: @v;
+    }
+    .class {
+        @ var v = '10px';
+       .mixin();
+    }    
+}

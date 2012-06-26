@@ -1,0 +1,19 @@
+.mixin(a,important) {
+    @ a = a || 0;
+    @ if (a==9) {
+        border: 9 !important;
+    @ }
+
+    border: @a@{important?' !important':''};
+    boxer: @a@{important?' !important':''};
+}
+
+.class {
+  .mixin(1);
+  .mixin(2,true);
+  .mixin(3);
+  .mixin(4,true);
+  .mixin(5);
+  .mixin(0,true);
+  .mixin(9);
+}

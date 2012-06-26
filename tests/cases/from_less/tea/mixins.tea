@@ -1,0 +1,93 @@
+.mixin() { border: 1px solid black; }
+.mixin { .mixin(); }
+.mixout() { border-color: orange; }
+.mixout { .mixout(); }
+.borders() { border-style: dashed; }
+.borders { .borders(); }
+
+@ var namespace = {};
+.namespace.borders() {
+    border-style: dotted;
+}
+.namespace.biohazard() {
+    content: "death";
+    .man {
+        .namespace.biohazard.man();
+    }
+}
+.namespace.biohazard.man() {
+    color: transparent;
+}
+
+#namespace {
+    .borders {
+        .namespace.borders();
+    }
+    .biohazard {
+        .namespace.biohazard();
+    }
+}
+
+
+@ var theme = {};
+.theme.mixin() {
+    background-color: grey;
+}
+.container() {
+  color: black;
+  .mixin();
+  .mixout();
+  .theme.mixin();
+}
+#theme > .mixin {
+    .theme.mixin();
+}
+#container {
+    .container();
+}
+
+#header {
+  .milk {
+    color: white;
+    .mixin();
+    .theme.mixin();
+  }
+  #cookie {
+    .chips {
+      .namespace.borders();
+      .calories {
+        .container();
+      }
+    }
+    .borders();
+  }
+}
+.secure-zone { .namespace.biohazard.man(); }
+.direct {
+  .namespace.borders();
+}
+
+.bar() {
+    width: 100%;
+}
+.bo, .bar { .bar(); }
+.bo() {
+    border: 1px;
+}
+.bo { .bo(); }
+.ar.bo.ca {
+    color: black;
+}
+@ var jo = {};
+.jo.ki() {
+    background: none;
+}
+.jo.ki { .jo.ki(); }
+.extended {
+    .bar();
+    .bo();
+    .jo.ki();
+}
+.foo .bar {
+  .bar();
+}

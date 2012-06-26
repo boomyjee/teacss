@@ -1,0 +1,33 @@
+@ var x = color('blue');
+@ var z = 'transparent';
+@ var mix = 'none';
+
+.mixin() {
+  @ mix = color('#989');
+}
+.mixin { .mixin(); }
+
+.tiny-scope {
+    .mixin();
+    color: @mix; // #989
+}
+
+.scope1 {
+  @ var y = color('orange');
+  @ var z = color('black');
+  color: @x; // blue
+  border-color: @z; // black
+  .hidden {
+    @ var x = '#131313';
+  }
+  .scope2 {
+    @ var y = color('red');
+    color: @x; // blue
+    .scope3 {
+      @ var local = color('white');
+      color: @y; // red
+      border-color: @z; // black
+      background-color: @local; // white
+    }
+  }
+}

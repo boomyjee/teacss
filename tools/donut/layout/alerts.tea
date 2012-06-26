@@ -1,0 +1,60 @@
+// ALERT STYLES
+// ------------
+.alert_block<alert>(type,block) {
+    @ if (type.indexOf("block")!=-1) block = true;
+
+    padding: 8px 35px 8px 14px;
+    margin-bottom: @baseLineHeight;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    background-color: @warningBackground;
+    border: 1px solid @warningBorder;
+    .border_radius('4px');
+
+    color: @warningText;
+    h4 {
+        color: @warningText;
+    }
+
+    .close {
+        position: relative;
+        top: -2px;
+        right: -21px;
+        line-height: 18px;
+    }
+
+    @ if (type=='success') {
+        background-color: @successBackground;
+        border-color: @successBorder;
+        &,h4 {
+            color: @successText;
+        }
+    @ }
+
+    @ if (type=='danger' || type=='error') {
+        background-color: @errorBackground;
+        border-color: @errorBorder;
+        &,h4 {
+            color: @errorText;
+        }
+    @ }
+
+    @ if (type=='info') {
+        background-color: @infoBackground;
+        border-color: @infoBorder;
+        &,h4 {
+            color: @infoText;
+        }
+    @ }
+
+    @ if (block) {
+        padding-top: 14px;
+        padding-bottom: 14px;
+
+        > p, > ul {
+            margin-bottom: 0;
+        }
+        p + p {
+            margin-top: 5px;
+        }
+    @ }
+}

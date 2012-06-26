@@ -1,0 +1,577 @@
+/* Add additional stylesheets below
+-------------------------------------------------- */
+/*
+  Bootstrap's documentation styles
+  Special styles for presenting Bootstrap's documentation and examples
+*/
+
+
+/* Body and structure
+-------------------------------------------------- */
+body.docs {
+  position: relative;
+  padding-top: 90px;
+  background-color: #fff;
+  background-image: url(@{tea.dir}../img/grid-18px-masked.png);
+  background-repeat: repeat-x;
+  background-position: 0 40px;
+}
+
+
+/* Tweak navbar brand link to be super sleek
+-------------------------------------------------- */
+.docs .navbar-fixed-top .brand {
+  padding-right: 0;
+  padding-left: 0;
+  margin-left: 20px;
+  float: right;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+  -webkit-transition: all .2s linear;
+     -moz-transition: all .2s linear;
+          transition: all .2s linear;
+}
+.docs .navbar-fixed-top .brand:hover {
+  text-decoration: none;
+}
+
+
+/* Space out sub-sections more
+-------------------------------------------------- */
+.docs section {
+  padding-top: 60px;
+}
+
+/* Faded out hr */
+.docs hr.soften {
+  height: 1px;
+  margin: 54px 0;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  border: 0;
+}
+
+
+/* Jumbotrons
+-------------------------------------------------- */
+.docs .jumbotron {
+  position: relative;
+}
+.docs .jumbotron h1 {
+  margin-bottom: 9px;
+  font-size: 81px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.docs .jumbotron p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+.docs .jumbotron .btn-large {
+  font-size: 20px;
+  font-weight: normal;
+  padding: 14px 24px;
+  margin-right: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+/* Masthead (docs home) */
+.docs .masthead {
+  padding-top: 36px;
+  margin-bottom: 72px;
+}
+.docs .masthead h1,
+.docs .masthead p {
+  text-align: center;
+}
+.docs .masthead h1 {
+  margin-bottom: 18px;
+}
+.docs .masthead p {
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+
+/* Specific jumbotrons
+------------------------- */
+/* supporting docs pages */
+.docs .subhead {
+  padding-bottom: 0;
+  margin-bottom: 9px;
+}
+.docs .subhead h1 {
+  font-size: 54px;
+}
+
+/* Subnav */
+.docs .subnav {
+  /*width: 100%;*/
+  height: 36px;
+  background-color: #eeeeee; /* Old browsers */
+  background-repeat: repeat-x; /* Repeat the gradient */
+  background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Chrome 10+,Safari 5.1+ */
+  background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* IE10+ */
+  background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Opera 11.10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* W3C */
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+.docs .subnav .nav {
+  margin-bottom: 0;
+}
+.docs .subnav .nav > li > a {
+  margin: 0;
+  padding-top:    11px;
+  padding-bottom: 11px;
+  border-left: 1px solid #f5f5f5;
+  border-right: 1px solid #e5e5e5;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+.docs .subnav .nav > .active > a,
+.docs .subnav .nav > .active > a:hover {
+  padding-left: 13px;
+  color: #777;
+  background-color: #e9e9e9;
+  border-right-color: #ddd;
+  border-left: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
+     -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
+          box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
+}
+.docs .subnav .nav > .active > a .caret,
+.docs .subnav .nav > .active > a:hover .caret {
+  border-top-color: #777;
+}
+.docs .subnav .nav > li:first-child > a,
+.docs .subnav .nav > li:first-child > a:hover {
+  border-left: 0;
+  padding-left: 12px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+.docs .subnav .nav > li:last-child > a {
+  border-right: 0;
+}
+.docs .subnav .dropdown-menu {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+
+/* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
+@media (min-width: 980px) {
+  .docs .subnav-fixed {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    border-color: #d5d5d5;
+    border-width: 0 0 1px; /* drop the border on the fixed edges */
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+    -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+       -moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+            box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+  }
+  .docs .subnav-fixed .nav {
+    width: 938px;
+    margin: 0 auto;
+    padding: 0 1px;
+  }
+  .docs .subnav .nav > li:first-child > a,
+  .docs .subnav .nav > li:first-child > a:hover {
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+  }
+}
+
+
+/* Quick links
+-------------------------------------------------- */
+.docs .quick-links {
+  min-height: 30px;
+  padding: 5px 20px;
+  margin: 36px 0;
+  list-style: none;
+  text-align: center;
+  overflow: hidden;
+}
+.docs .quick-links li {
+  display: inline;
+  margin: 0 5px;
+  color: #999;
+}
+.docs .quick-links .github-btn,
+.docs .quick-links .tweet-btn,
+.docs .quick-links .follow-btn {
+  position: relative;
+  top: 5px;
+}
+
+
+/* Marketing section of Overview
+-------------------------------------------------- */
+.docs .marketing .row {
+  margin-bottom: 9px;
+}
+.docs .marketing h1 {
+  margin: 36px 0 27px;
+  font-size: 40px;
+  font-weight: 300;
+  text-align: center;
+}
+.docs .marketing h2,
+.docs .marketing h3 {
+  font-weight: 300;
+}
+.docs .marketing h2 {
+  font-size: 22px;
+}
+.docs .marketing p {
+  margin-right: 10px;
+}
+.docs .marketing .bs-icon {
+  float: left;
+  margin: 7px 10px 0 0;
+  opacity: .8;
+}
+.docs .marketing .small-bs-icon {
+  float: left;
+  margin: 4px 5px 0 0;
+}
+
+
+
+/* Footer
+-------------------------------------------------- */
+.docs .footer {
+  margin-top: 45px;
+  padding: 35px 0 36px;
+  border-top: 1px solid #e5e5e5;
+}
+.docs .footer p {
+  margin-bottom: 0;
+  color: #555;
+}
+
+
+
+/* Special grid styles
+-------------------------------------------------- */
+.docs .show-grid {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.docs .show-grid [class*="span"] {
+  background-color: #eee;
+  text-align: center;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  min-height: 30px;
+  line-height: 30px;
+}
+.docs .show-grid:hover [class*="span"] {
+  background: #ddd;
+}
+.docs .show-grid .show-grid {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.docs .show-grid .show-grid [class*="span"] {
+  background-color: #ccc;
+}
+
+
+/* Render mini layout previews
+-------------------------------------------------- */
+.docs .mini-layout {
+  border: 1px solid #ddd;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+          box-shadow: 0 1px 2px rgba(0,0,0,.075);
+}
+.docs .mini-layout {
+  height: 240px;
+  margin-bottom: 20px;
+  padding: 9px;
+}
+.docs .mini-layout div {
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+.docs .mini-layout .mini-layout-body {
+  background-color: #dceaf4;
+  margin: 0 auto;
+  width: 70%;
+  height: 240px;
+}
+.docs .mini-layout.fluid .mini-layout-sidebar,
+.docs .mini-layout.fluid .mini-layout-header,
+.docs .mini-layout.fluid .mini-layout-body {
+  float: left;
+}
+.docs .mini-layout.fluid .mini-layout-sidebar {
+  background-color: #bbd8e9;
+  width: 20%;
+  height: 240px;
+}
+.docs .mini-layout.fluid .mini-layout-body {
+  width: 77.5%;
+  margin-left: 2.5%;
+}
+
+
+/* Popover docs
+-------------------------------------------------- */
+.docs .popover-well {
+  min-height: 160px;
+}
+.docs .popover-well .popover {
+  display: block;
+}
+.docs .popover-well .popover-wrapper {
+  width: 50%;
+  height: 160px;
+  float: left;
+  margin-left: 55px;
+  position: relative;
+}
+.docs .popover-well .popover-menu-wrapper {
+  height: 80px;
+}
+.docs .large-bird {
+  margin: 5px 0 0 310px;
+  opacity: .1;
+}
+
+
+/* Download page
+-------------------------------------------------- */
+.docs .download .page-header {
+  margin-top: 36px;
+}
+.docs .page-header .toggle-all {
+  margin-top: 5px;
+}
+
+/* Space out h3s when following a section */
+.docs .download h3 {
+  margin-bottom: 5px;
+}
+.docs .download-builder input + h3,
+.docs .download-builder .checkbox + h3 {
+  margin-top: 9px;
+}
+
+/* Fields for variables */
+.docs .download-builder input[type=text] {
+  margin-bottom: 9px;
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-size: 12px;
+  color: #d14;
+}
+.docs .download-builder input[type=text]:focus {
+  background-color: #fff;
+}
+
+/* Custom, larger checkbox labels */
+.docs .download .checkbox {
+  padding: 6px 10px 6px 25px;
+  color: #555;
+  background-color: #f9f9f9;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  cursor: pointer;
+}
+.docs .download .checkbox:hover {
+  color: #333;
+  background-color: #f5f5f5;
+}
+.docs .download .checkbox small {
+  font-size: 12px;
+  color: #777;
+}
+
+/* Variables section */
+.docs #variables label {
+  margin-bottom: 0;
+}
+
+/* Giant download button */
+.docs .download-btn {
+  margin: 36px 0 108px;
+}
+.docs .download p,
+.docs .download h4 {
+  max-width: 50%;
+  margin: 0 auto;
+  color: #999;
+  text-align: center;
+}
+.docs .download h4 {
+  margin-bottom: 0;
+}
+.docs .download p {
+  margin-bottom: 18px;
+}
+.docs .download-btn .btn {
+  display: block;
+  width: auto;
+  padding: 19px 24px;
+  margin-bottom: 27px;
+  font-size: 30px;
+  line-height: 1;
+  text-align: center;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+
+
+/* Color swatches on LESS docs page
+-------------------------------------------------- */
+/* Sets the width of the td */
+.docs .swatch-col {
+  width: 30px;
+}
+/* Le swatch */
+.docs .swatch {
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  margin: -6px 0;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+/* For white swatches, give a border */
+.docs .swatch-bordered {
+  width: 28px;
+  height: 18px;
+  border: 1px solid #eee;
+}
+
+
+/* Misc
+-------------------------------------------------- */
+
+.docs pre.prettyprint {
+  overflow: hidden;
+}
+
+.docs .browser-support {
+  max-width: 100%;
+}
+
+/* Make tables spaced out a bit more */
+.docs h2 + table,
+.docs h3 + table,
+.docs h4 + table,
+.docs h2 + .row {
+  margin-top: 5px;
+}
+
+/* Example sites showcase */
+.docs .example-sites img {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.docs .marketing-byline {
+  margin: -18px 0 27px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #999;
+  text-align: center;
+}
+
+.docs .scrollspy-example {
+  height: 200px;
+  overflow: auto;
+  position: relative;
+}
+
+/* Remove bottom margin on example forms in wells */
+.docs form.well {
+  padding: 14px;
+}
+
+/* Tighten up spacing */
+.docs .well hr {
+  margin: 18px 0;
+}
+
+/* Fake the :focus state to demo it */
+.docs .focused {
+  border-color: rgba(82,168,236,.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.1), 0 0 8px rgba(82,168,236,.6);
+     -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.1), 0 0 8px rgba(82,168,236,.6);
+          box-shadow: inset 0 1px 3px rgba(0,0,0,.1), 0 0 8px rgba(82,168,236,.6);
+  outline: 0;
+}
+
+/* For input sizes, make them display block */
+.docs .docs-input-sizes select,
+.docs .docs-input-sizes input[type=text] {
+  display: block;
+  margin-bottom: 9px;
+}
+
+/* Icons
+------------------------- */
+.docs .the-icons {
+  margin-bottom: 18px;
+}
+.docs .the-icons i {
+  display: block;
+  margin-bottom: 5px;
+}
+.docs .the-icons i:hover {
+  background-color: rgba(255,0,0,.25);
+}
+.docs .the-icons i:after {
+  display: block;
+  content: attr(class);
+  font-style: normal;
+  margin-left: 20px;
+  width: 140px;
+}
+.docs #javascript input[type=checkbox] {
+  position: relative;
+  top: -1px;
+  display: inline;
+  margin-left: 6px;
+}
+
+/* Eaxmples page
+------------------------- */
+.docs .bootstrap-examples .thumbnail {
+  margin-bottom: 9px;
+  background-color: #fff;
+}

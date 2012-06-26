@@ -1,0 +1,29 @@
+@ font = {family:{}};
+.font.family.serif() {
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+.font.family.sans_serif() {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.font.family.monospace() {
+    font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+.font.shorthand(size,weight,lineHeight) {
+    @ size = size || baseFontSize; weight = weight || 'normal'; lineHeight = lineHeight || baseLineHeight;
+    font-size: @size;
+    font-weight: @weight;
+    line-height: @lineHeight;
+}
+.font.serif(size, weight, lineHeight) {
+    .font.family.serif();
+    .font.shorthand(size, weight, lineHeight);
+}
+.font.sans_serif(size, weight, lineHeight) {
+    .font.family.sans_serif();
+    .font.shorthand(size, weight, lineHeight);
+}
+.font.monospace(size, weight, lineHeight) {
+    .font.family.monospace();
+    .font.shorthand(size, weight,lineHeight);
+}

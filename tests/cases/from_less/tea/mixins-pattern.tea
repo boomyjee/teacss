@@ -1,0 +1,116 @@
+/*.mixin (...) {
+    variadic: true;
+}
+.mixin () {
+    zero: 0;
+}
+.mixin (@a: 1px) {
+    one: 1;
+}
+.mixin (@a) {
+    one-req: 1;
+}
+.mixin (@a: 1px, @b: 2px) {
+    two: 2;
+}
+
+.mixin (@a, @b, @c) {
+    three-req: 3;
+}
+
+.mixin (@a: 1px, @b: 2px, @c: 3px) {
+    three: 3;
+}   */
+
+.mixin(a,b,c) {
+    variadic: true;
+    @ if (!a && !b && !c) {
+        zero: 0;
+        one: 1;
+        two: 2;
+        three: 3;
+    @ }
+    @ if (a && b && c) {
+        three-req: 3;
+        three: 3;
+    @ } else if (a && b) {
+        two: 2;
+        three: 3;
+    @ } else if (a) {
+        one: 1;
+        one-req: 1;
+        two: 2;
+        three: 3;
+    @ }
+}
+
+.zero {
+    .mixin();
+}
+
+.one {
+    .mixin(1);
+}
+
+.two {
+    .mixin(1, 2);
+}
+
+.three {
+    .mixin(1, 2, 3);
+}
+
+//
+
+.mixout(param) {
+    @ if (param=='left')
+        left: 1;
+    @ else
+        right: 1;
+}
+
+.left {
+    .mixout('left');
+}
+.right {
+    .mixout('right');
+}
+
+//
+
+.border(side, width) {
+    color: black;
+    .border_side(side,width);
+}
+.border_side(side, w) {
+    border-@side: @w;
+}
+
+.border-right {
+    .border('right', '4px');
+}
+.border-left {
+    .border('left', '4px');
+}
+
+//
+
+
+.border_radius(r,side) {
+    @ if (side=='left')
+        left: @r;
+    @ else if (side=='right')
+        right: @r;
+    @ else
+        both: @{r * 10};
+}
+
+.only-right {
+    .border_radius(33, 'right');
+}
+.only-left {
+    .border_radius(33, 'left');
+}
+.left-right {
+    .border_radius(33);
+}

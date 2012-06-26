@@ -1,0 +1,41 @@
+@{
+    grid = function(columns,columnWidth,gutterWidth) {
+        grid.columnCount = columns;
+        grid.columnWidth = columnWidth;
+        grid.gutterWidth = gutterWidth;
+    }
+    grid.columnCount = 16
+    grid.columnWidth = 40
+    grid.gutterWidth = 20
+}
+
+.container(width) {
+    @ width = width || '900px';
+    width: @width;
+    margin: 0 auto;
+    .clearfix();
+}
+
+.grid.container() {
+    @ siteWidth = (grid.columnCount * grid.columnWidth) + (grid.gutterWidth * (grid.columnCount-1))
+    .container(siteWidth+'px');
+}
+
+.grid.columns(columnSpan) {
+    display: inline;
+    float: left;
+    width: @{(grid.columnWidth * columnSpan) + (grid.gutterWidth * (columnSpan - 1))}px;
+    margin-left: @{grid.gutterWidth}px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.grid.prepend(columnOffset) {
+    margin-left:  @{(grid.columnWidth * columnOffset) + (grid.gutterWidth * (columnOffset - 1))}px !important;
+}
+
+.grid.append(columnOffset) {
+    margin-right: @{(grid.columnWidth * columnOffset) + (grid.gutterWidth * (columnOffset - 1))}px !important;
+}

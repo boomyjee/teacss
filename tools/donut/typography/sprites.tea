@@ -1,0 +1,148 @@
+.icon(type,white) {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: text-top;
+
+    @ if (white)
+        background-image: url(@{imagesDir}glyphicons-halflings-white.png);
+    @ else
+        background-image: url(@{imagesDir}glyphicons-halflings.png);
+    
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+    
+    .ie7_restore_right_whitespace();
+
+    @{
+        switch (type) {
+            case "glass"              :@{ background-position: 0      0; }; break;
+            case "music"              :@{ background-position: -24px  0; }; break;
+            case "search"             :@{ background-position: -48px  0; }; break;
+            case "envelope"           :@{ background-position: -72px  0; }; break;
+            case "heart"              :@{ background-position: -96px  0; }; break;
+            case "star"               :@{ background-position: -120px 0; }; break;
+            case "star-empty"         :@{ background-position: -144px 0; }; break;
+            case "user"               :@{ background-position: -168px 0; }; break;
+            case "film"               :@{ background-position: -192px 0; }; break;
+            case "th-large"           :@{ background-position: -216px 0; }; break;
+            case "th"                 :@{ background-position: -240px 0; }; break;
+            case "th-list"            :@{ background-position: -264px 0; }; break;
+            case "ok"                 :@{ background-position: -288px 0; }; break;
+            case "remove"             :@{ background-position: -312px 0; }; break;
+            case "zoom-in"            :@{ background-position: -336px 0; }; break;
+            case "zoom-out"           :@{ background-position: -360px 0; }; break;
+            case "off"                :@{ background-position: -384px 0; }; break;
+            case "signal"             :@{ background-position: -408px 0; }; break;
+            case "cog"                :@{ background-position: -432px 0; }; break;
+            case "trash"              :@{ background-position: -456px 0; }; break;
+                        
+            case "home"               :@{ background-position: 0      -24px; }; break;
+            case "file"               :@{ background-position: -24px  -24px; }; break;
+            case "time"               :@{ background-position: -48px  -24px; }; break;
+            case "road"               :@{ background-position: -72px  -24px; }; break;
+            case "download-alt"       :@{ background-position: -96px  -24px; }; break;
+            case "download"           :@{ background-position: -120px -24px; }; break;
+            case "upload"             :@{ background-position: -144px -24px; }; break;
+            case "inbox"              :@{ background-position: -168px -24px; }; break;
+            case "play-circle"        :@{ background-position: -192px -24px; }; break;
+            case "repeat"             :@{ background-position: -216px -24px; }; break;
+            case "refresh"            :@{ background-position: -240px -24px; }; break;
+            case "list-alt"           :@{ background-position: -264px -24px; }; break;
+            case "lock"               :@{ background-position: -287px -24px; }; break; // 1px off
+            case "flag"               :@{ background-position: -312px -24px; }; break;
+            case "headphones"         :@{ background-position: -336px -24px; }; break;
+            case "volume-off"         :@{ background-position: -360px -24px; }; break;
+            case "volume-down"        :@{ background-position: -384px -24px; }; break;
+            case "volume-up"          :@{ background-position: -408px -24px; }; break;
+            case "qrcode"             :@{ background-position: -432px -24px; }; break;
+            case "barcode"            :@{ background-position: -456px -24px; }; break;
+                        
+            case "tag"                :@{ background-position: 0      -48px; }; break;
+            case "tags"               :@{ background-position: -25px  -48px; }; break; // 1px off
+            case "book"               :@{ background-position: -48px  -48px; }; break;
+            case "bookmark"           :@{ background-position: -72px  -48px; }; break;
+            case "print"              :@{ background-position: -96px  -48px; }; break;
+            case "camera"             :@{ background-position: -120px -48px; }; break;
+            case "font"               :@{ background-position: -144px -48px; }; break;
+            case "bold"               :@{ background-position: -167px -48px; }; break; // 1px off
+            case "italic"             :@{ background-position: -192px -48px; }; break;
+            case "text-height"        :@{ background-position: -216px -48px; }; break;
+            case "text-width"         :@{ background-position: -240px -48px; }; break;
+            case "align-left"         :@{ background-position: -264px -48px; }; break;
+            case "align-center"       :@{ background-position: -288px -48px; }; break;
+            case "align-right"        :@{ background-position: -312px -48px; }; break;
+            case "align-justify"      :@{ background-position: -336px -48px; }; break;
+            case "list"               :@{ background-position: -360px -48px; }; break;
+            case "indent-left"        :@{ background-position: -384px -48px; }; break;
+            case "indent-right"       :@{ background-position: -408px -48px; }; break;
+            case "facetime-video"     :@{ background-position: -432px -48px; }; break;
+            case "picture"            :@{ background-position: -456px -48px; }; break;
+                        
+            case "pencil"             :@{ background-position: 0      -72px; }; break;
+            case "map-marker"         :@{ background-position: -24px  -72px; }; break;
+            case "adjust"             :@{ background-position: -48px  -72px; }; break;
+            case "tint"               :@{ background-position: -72px  -72px; }; break;
+            case "edit"               :@{ background-position: -96px  -72px; }; break;
+            case "share"              :@{ background-position: -120px -72px; }; break;
+            case "check"              :@{ background-position: -144px -72px; }; break;
+            case "move"               :@{ background-position: -168px -72px; }; break;
+            case "step-backward"      :@{ background-position: -192px -72px; }; break;
+            case "fast-backward"      :@{ background-position: -216px -72px; }; break;
+            case "backward"           :@{ background-position: -240px -72px; }; break;
+            case "play"               :@{ background-position: -264px -72px; }; break;
+            case "pause"              :@{ background-position: -288px -72px; }; break;
+            case "stop"               :@{ background-position: -312px -72px; }; break;
+            case "forward"            :@{ background-position: -336px -72px; }; break;
+            case "fast-forward"       :@{ background-position: -360px -72px; }; break;
+            case "step-forward"       :@{ background-position: -384px -72px; }; break;
+            case "eject"              :@{ background-position: -408px -72px; }; break;
+            case "chevron-left"       :@{ background-position: -432px -72px; }; break;
+            case "chevron-right"      :@{ background-position: -456px -72px; }; break;
+                        
+            case "plus-sign"          :@{ background-position: 0      -96px; }; break;
+            case "minus-sign"         :@{ background-position: -24px  -96px; }; break;
+            case "remove-sign"        :@{ background-position: -48px  -96px; }; break;
+            case "ok-sign"            :@{ background-position: -72px  -96px; }; break;
+            case "question-sign"      :@{ background-position: -96px  -96px; }; break;
+            case "info-sign"          :@{ background-position: -120px -96px; }; break;
+            case "screenshot"         :@{ background-position: -144px -96px; }; break;
+            case "remove-circle"      :@{ background-position: -168px -96px; }; break;
+            case "ok-circle"          :@{ background-position: -192px -96px; }; break;
+            case "ban-circle"         :@{ background-position: -216px -96px; }; break;
+            case "arrow-left"         :@{ background-position: -240px -96px; }; break;
+            case "arrow-right"        :@{ background-position: -264px -96px; }; break;
+            case "arrow-up"           :@{ background-position: -289px -96px; }; break; // 1px off
+            case "arrow-down"         :@{ background-position: -312px -96px; }; break;
+            case "share-alt"          :@{ background-position: -336px -96px; }; break;
+            case "resize-full"        :@{ background-position: -360px -96px; }; break;
+            case "resize-small"       :@{ background-position: -384px -96px; }; break;
+            case "plus"               :@{ background-position: -408px -96px; }; break;
+            case "minus"              :@{ background-position: -433px -96px; }; break;
+            case "asterisk"           :@{ background-position: -456px -96px; }; break;
+                        
+            case "exclamation-sign"   :@{ background-position: 0      -120px; }; break;
+            case "gift"               :@{ background-position: -24px  -120px; }; break;
+            case "leaf"               :@{ background-position: -48px  -120px; }; break;
+            case "fire"               :@{ background-position: -72px  -120px; }; break;
+            case "eye-open"           :@{ background-position: -96px  -120px; }; break;
+            case "eye-close"          :@{ background-position: -120px -120px; }; break;
+            case "warning-sign"       :@{ background-position: -144px -120px; }; break;
+            case "plane"              :@{ background-position: -168px -120px; }; break;
+            case "calendar"           :@{ background-position: -192px -120px; }; break;
+            case "random"             :@{ background-position: -216px -120px; }; break;
+            case "comment"            :@{ background-position: -240px -120px; }; break;
+            case "magnet"             :@{ background-position: -264px -120px; }; break;
+            case "chevron-up"         :@{ background-position: -288px -120px; }; break;
+            case "chevron-down"       :@{ background-position: -313px -119px; }; break; // 1px off
+            case "retweet"            :@{ background-position: -336px -120px; }; break;
+            case "shopping-cart"      :@{ background-position: -360px -120px; }; break;
+            case "folder-close"       :@{ background-position: -384px -120px; }; break;
+            case "folder-open"        :@{ background-position: -408px -120px; }; break;
+            case "resize-vertical"    :@{ background-position: -432px -119px; }; break;
+            case "resize-horizontal"  :@{ background-position: -456px -118px; }; break;                     
+        }
+    }
+}
+
+

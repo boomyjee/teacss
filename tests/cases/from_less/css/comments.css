@@ -1,0 +1,17 @@
+#comments /* boo */ {
+    color: red;
+    background-color: orange;
+    font-size: 12px;
+    content: "content";
+    border: 1px solid black;
+    padding: 0;
+    margin: 2em;
+}
+.selector /* .with */, .lots, /* of */ .comments {
+    color: #808080, /* blue */ #ffa500;
+    -webkit-border-radius: 2px /* webkit only */;
+    -moz-border-radius: 8px /* moz only with operation */;
+}
+#last {
+    color: #0000ff;
+}

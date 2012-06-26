@@ -1,0 +1,23 @@
+.mix_inner(v) {
+  border-width: @v;
+}
+
+.mix(a) {
+    @ a = a || 10;
+    .inner {
+        height: @{a * 10};
+
+        .innest {
+            width: @a;
+            .mix_inner(a * 2);
+        }
+    }
+}
+
+.class {
+    .mix(30);
+}
+
+.class2 {
+    .mix(60);
+}
