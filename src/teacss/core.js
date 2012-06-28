@@ -895,6 +895,7 @@ var teacss = teacss || (function(){
             var token = tokens[t];
             switch (token.name) {
                 // AS IS tokens, one token - one ast node with the same name
+                case "nop":
                 case "js_line":
                 case "blank":
                 case "comment":
@@ -986,7 +987,11 @@ var teacss = teacss || (function(){
                     ast = ast.parent; break;
                 
                 // js block syntax
-                case "js_block_start": ast = ast.push("js_block"); break;
+                case "js_block_start": 
+                    ast = ast.push("js_block"); 
+                    ast.is_block = true;
+                    ast.data = "@";
+                    break;
                 case "js_code": ast.push(token.name,token.data); break;
                 case "js_block_end": ast = ast.parent; break;                    
             }
@@ -1006,7 +1011,7 @@ var teacss = teacss || (function(){
             js: false,
             errors: [],
             imports: imports,
-            ast: ast
+            ast: root_ast
         }
     }
     return teacss;
