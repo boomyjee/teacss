@@ -9,10 +9,52 @@ var teacss = teacss || (function(){
         // parsed cache
         parsed:{},
         // sheets registered on start
-        sheets:{},
-        // aliases for mixins
-        aliases:{}
+        sheets:{}
     };
+
+    // Path utils
+    teacss.path = {
+        isAbsoluteOrData : function(path) {
+            return /^(.:\/|data:|http:\/\/|https:\/\/|\/)/.test(path)
+        },
+        absolute: function (src) {
+            var a = document.createElement('a');
+            a.href = src;
+            return a.href;            
+        },
+        clean : function (part) {
+            part = part.replace(/\\/g,"/");
+            part = part.split("/");
+            for (var p=0;p<part.length;p++) {
+                if (part[p]=='..' && part[p-1]) {
+                    part.splice(p-1,2);
+                    p = p - 2;
+                }
+                if (part[p]==".") {
+                    part.splice(p,1);
+                    p = p - 1;
+                }
+            }
+            return part = part.join("/");
+        },
+        dir : function (path) {
+            var dir = path.replace(/\\/g,"/").split('/');dir.pop();dir = dir.join("/")+'/';
+            return dir;
+        },
+        relative : function (path,from) {
+            var pathParts = path.split("/");
+            var fromParts = from.split("/");
+
+            var once = false;
+            while (pathParts.length && fromParts.length && pathParts[0]==fromParts[0]) {
+                pathParts.splice(0,1);
+                fromParts.splice(0,1);
+                once = true;
+            }
+            if (!once || fromParts.length>2) return path;
+            return new Array(fromParts.length).join("../") + pathParts.join("/");
+        }
+    }    
     
     // LazyLoad library
     LazyLoad_f=function(k){function p(b,a){var g=k.createElement(b),c;for(c in a)a.hasOwnProperty(c)&&g.setAttribute(c,a[c]);return g}function l(b){var a=m[b],c,f;if(a)c=a.callback,f=a.urls,f.shift(),h=0,f.length||(c&&c.call(a.context,a.obj),m[b]=null,n[b].length&&j(b))}function w(){var b=navigator.userAgent;c={async:k.createElement("script").async===!0};(c.webkit=/AppleWebKit\//.test(b))||(c.ie=/MSIE/.test(b))||(c.opera=/Opera/.test(b))||(c.gecko=/Gecko\//.test(b))||(c.unknown=!0)}function j(b,a,g,f,h){var j=
@@ -355,6 +397,7 @@ var teacss = teacss || (function(){
             }
             teacss.tea.Style.rules.push(this);
         },
+        aliases: {},
         rule: function (key,val) {
             if (val && val.constructor && val.call && val.apply) {
                 if (key && key[0]=='@') return this.namespace(key,val);
@@ -365,8 +408,8 @@ var teacss = teacss || (function(){
                 var s = (val!==undefined) ? key+':'+val : key;
                 
                 if (key.substring(0,7)=="@append") return this.append(s);
-                if (val && teacss.aliases[key]) {
-                    window[teacss.aliases[key]](trim(val.substring(1)));
+                if (val && this.aliases[key]) {
+                    window[this.aliases[key]](trim(val.substring(1)));
                     return;
                 }
                 
@@ -549,7 +592,7 @@ var teacss = teacss || (function(){
         for (var i = 0; i < links.length; i++) {
             var tea = links[i].getAttribute('tea');
             if (tea) {
-                sheets.push({src:tea});
+                sheets.push({src:teacss.path.absolute(tea)});
             }
         }
         return sheets;
@@ -948,7 +991,7 @@ var teacss = teacss || (function(){
                         }
                     ast.data = ast.selector;
                     var is_block = ast.is_block = (tokens[t+1] && tokens[t+1].name=="scope_start");
-                    if (ast.is_block) t++;
+                    if (ast.is_block) { t++; pos += tokens[t].data.length; }
                     
                     // selector switches to a new scope
                     var scope = ast.selector.split(" ",1)[0];

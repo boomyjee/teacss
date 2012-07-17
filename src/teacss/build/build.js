@@ -1,41 +1,5 @@
 teacss.build = (function () {
-    var path = {
-        isAbsoluteOrData : function(part) {
-            return /^(.:\/|data:|http:\/\/|https:\/\/|\/)/.test(part)
-        },
-        clean : function (part) {
-            part = part.replace(/\\/g,"/");
-            part = part.split("/");
-            for (var p=0;p<part.length;p++) {
-                if (part[p]=='..' && part[p-1]) {
-                    part.splice(p-1,2);
-                    p = p - 2;
-                }
-                if (part[p]==".") {
-                    part.splice(p,1);
-                    p = p - 1;
-                }
-            }
-            return part = part.join("/");
-        },
-        dir : function (path) {
-            var dir = path.replace(/\\/g,"/").split('/');dir.pop();dir = dir.join("/")+'/';
-            return dir;
-        },
-        relative : function (path,from) {
-            var pathParts = path.split("/");
-            var fromParts = from.split("/");
-
-            var once = false;
-            while (pathParts.length && fromParts.length && pathParts[0]==fromParts[0]) {
-                pathParts.splice(0,1);
-                fromParts.splice(0,1);
-                once = true;
-            }
-            if (!once || fromParts.length>2) return path;
-            return new Array(fromParts.length).join("../") + pathParts.join("/");
-        }
-    }
+    var path = teacss.path;
         
     /**
      * Builds tea file into js|css|images object
@@ -141,6 +105,7 @@ teacss.build = (function () {
         if (!teacss.buildCallback) return;
         
         var div = document.createElement('div');
+        div.id = "teacss-build-panel";
         div.style.position = 'fixed';
         div.style.right = '3px';
         div.style.top = '3px';
@@ -150,8 +115,8 @@ teacss.build = (function () {
         var html = "";
         html += '<div style="border:1px solid #555;padding:5px;margin:0;background:#333;color:#fff;">';
         for (var s=0;s<teacss.sheets.length;s++) {
-            html += 'Build <a style="cursor:pointer;color:#ffa;" onclick="teacss.build.run('+s+')">' 
-                + escape(teacss.sheets[s].src) + '</a><br>'
+            html += 'Build <a style="cursor:pointer;color:#ffa;padding:0;margin:0;background:transparent;border:none;" onclick="teacss.build.run('+s+')"><pre style="display:inline;padding:0;margin:0;background:transparent;border:none;">' 
+                + teacss.sheets[s].src + '</pre></a><br>'
         }
         html += '</div>';
         
