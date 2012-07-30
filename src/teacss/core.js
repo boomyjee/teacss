@@ -163,7 +163,12 @@ var teacss = teacss || (function(){
                         output += ast.children[i].getJS(this);
                     output += "}";
                 } else {
-                    output += ast.selector.substring(1)+";";
+                    var args;
+                    if (/^\(\s*\)$/.test(match[3])) 
+                        args = "(this)";
+                    else
+                        args = "(this, "+ match[3].substring(1);
+                    output += match[1] + ".call"+args+";";
                 }
                 return output;
             }
@@ -292,8 +297,13 @@ var teacss = teacss || (function(){
                 callback(list.join(';\n'));
             });
         },
-        insert: function (document,names) {
+        insert: function (document,names,callback) {
 
+            if (names && names.call && names.apply) {
+                callback = names;
+                names = undefined;
+            }
+            
             var id = "script_"+(teacss.tea.processed).replace(/[^A-Za-z0-9]/g,'_');
             var node = document.getElementById(id);
             if (node) return;
@@ -338,6 +348,7 @@ var teacss = teacss || (function(){
                         script = document.createElement("script");
                         script.innerHTML = code;
                         head.appendChild(script);
+                        done();
                     },what);
                 } else {
                     q.defer(function(what,done){
@@ -345,6 +356,8 @@ var teacss = teacss || (function(){
                     },what);
                 }
             }
+            
+            if (callback) q.await(callback);
         }
     });
     

@@ -12,7 +12,7 @@ teacss.image = teacss.functions.image = teacss.image || (function(){
             if (callback)
                 callback.apply();
             else 
-                teacss.update();
+                teacss.image.update();
         }
     }
 
@@ -85,6 +85,7 @@ teacss.image = teacss.functions.image = teacss.image || (function(){
     constructor.startDeferred = startDeferred;
     constructor.endDeferred = endDeferred;
     constructor.load = load;
+    constructor.update = function () { teacss.update(); }
 
     return constructor;
 })();
