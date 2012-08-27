@@ -1,4 +1,4 @@
-var teacss = teacss || (function(){
+window.teacss = window.teacss || (function(){
     var teacss = {
         // runtime
         tea: false,
@@ -559,26 +559,30 @@ var teacss = teacss || (function(){
         
     teacss.process = function (path,callback,document) {
         if (path[0]=="/") path = location.protocol + "//" +location.host+path;
-
+        
+        function processParsed(parsed,callback) {
+            if (!parsed) 
+                callback();
+            else {
+                if (parsed.imports.length==0) callback();
+                var loaded = 0;
+                var loaded_cb = function () {
+                    loaded++;
+                    if (loaded==parsed.imports.length) callback();
+                }
+                for (var i=0;i<parsed.imports.length;i++) {
+                    processFile(parsed.imports[i],loaded_cb);
+                }     
+            }
+        }
+        
         function processFile(path,callback) {
             teacss.parseFile(path,function(parsed){
-                if (!parsed) 
-                    callback();
-                else {
-                    if (parsed.imports.length==0) callback();
-                    var loaded = 0;
-                    var loaded_cb = function () {
-                        loaded++;
-                        if (loaded==parsed.imports.length) callback();
-                    }
-                    for (var i=0;i<parsed.imports.length;i++) {
-                        processFile(parsed.imports[i],loaded_cb);
-                    }     
-                }
+                processParsed(parsed,callback);
             });
         }
         
-        processFile(path,function(){
+        function wrap() {
             for (var key in teacss.tea) {
                 if (teacss.tea[key] && teacss.tea[key].start) teacss.tea[key].start();
             }
@@ -591,7 +595,9 @@ var teacss = teacss || (function(){
                 if (teacss.tea[key] && teacss.tea[key].finish) teacss.tea[key].finish();
             }
             callback();
-        });
+        }        
+        
+        processFile(path,wrap);
     }
         
     teacss.sheets = function () {
@@ -625,7 +631,7 @@ var teacss = teacss || (function(){
             var sheet = teacss.sheets[i];
             q.defer(function(sheet,done){
                 teacss.process(
-                    sheet.src,
+                    sheet.src || location.href,
                     function(){
                         teacss.tea.Style.insert(document);
                         teacss.tea.Script.insert(document);

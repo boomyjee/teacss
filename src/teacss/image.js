@@ -9,15 +9,14 @@ teacss.image = teacss.functions.image = teacss.image || (function(){
     var endDeferred = function (callback) {
         deferred--;
         if (deferred==0) {
-            if (callback)
-                callback.apply();
-            else 
-                teacss.image.update();
+            teacss.image.deferredUpdate = true;
+            if (callback) callback.apply(); else teacss.image.update();
+            teacss.image.deferredUpdate = false;
         }
     }
 
     var load = function (list,callback) {
-        var list = (list.constructor==Array) ? list : [list];
+        var list = (list && list.constructor==Array) ? list : [list];
         var left = list.length;
         var local_callback = function (url) {
             left--;

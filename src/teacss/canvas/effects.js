@@ -438,6 +438,7 @@ teacss.Canvas.effects = teacss.Canvas.effects || function() {
         var tea = teacss.tea;
         var selector = tea.Style.current.getSelector();
         var id = selector.replace(/[^A-Za-z_0-9-]/g,"_")+"_canvas";
+        var doc = teacss.tea.document ? teacss.tea.document : document;
         
         Canvas.defaultElement.width = canvas.width;
         Canvas.defaultElement.height = canvas.height;
@@ -450,7 +451,7 @@ teacss.Canvas.effects = teacss.Canvas.effects || function() {
             context = cached.context;
         } 
         else {
-            element = document.createElement("canvas");
+            element = doc.createElement("canvas");
             context = element.getContext('2d');
             previewCanvasCache[id] = { element: element, context : context }
         }
@@ -460,7 +461,6 @@ teacss.Canvas.effects = teacss.Canvas.effects || function() {
         
         context.drawImage(Canvas.defaultElement,0,0);
         
-        var doc = teacss.tea.document ? teacss.tea.document : document;
         if (doc.mozSetImageElement) {
             tea.rule('background-image','-moz-element(#'+id+')');
             doc.mozSetImageElement(id,element);
