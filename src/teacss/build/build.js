@@ -39,7 +39,10 @@ teacss.build = (function () {
             teacss.tea.Style.rule("background-image:url("+part+");");
         }
         
+        teacss.building = true;
         teacss.process(makefile,function(){        
+            
+            teacss.building = false;
             
             teacss.Canvas.effects.background = old_canvasBackground;
             var q = teacss.queue(10);

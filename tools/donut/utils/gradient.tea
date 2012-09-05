@@ -79,7 +79,8 @@
             var stop = stops[i];
             var coord = stop[0];
             var color = stop[1];
-            stops_css.push( color.toString() + " " + coord + "%" );
+            coord = (typeof coord=="number") ? coord + "%" : coord;
+            stops_css.push(color.toString() + " " + coord);
         }
         stops_css = stops_css.join(", ");
     }

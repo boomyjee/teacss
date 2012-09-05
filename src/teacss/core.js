@@ -161,6 +161,10 @@ window.teacss = window.teacss || (function(){
                     output += match[1] + " = function "+match[3]+" {";
                     for (var i=0;i<ast.children.length;i++)
                         output += ast.children[i].getJS(this);
+                    if (match[2]) {
+                        if (!this.aliases) this.aliases = {};
+                        this.aliases[match[2].substring(1,match[2].length-1)] = match[1];
+                    }
                     output += "}";
                 } else {
                     var args;
@@ -410,7 +414,6 @@ window.teacss = window.teacss || (function(){
             }
             teacss.tea.Style.rules.push(this);
         },
-        aliases: {},
         rule: function (key,val) {
             if (val && val.constructor && val.call && val.apply) {
                 if (key && key[0]=='@') return this.namespace(key,val);
@@ -419,13 +422,16 @@ window.teacss = window.teacss || (function(){
                 this.current = this.current.parent;            
             } else {
                 var s = (val!==undefined) ? key+':'+val : key;
-                
                 if (key.substring(0,7)=="@append") return this.append(s);
-                if (val && this.aliases[key]) {
-                    window[this.aliases[key]](trim(val.substring(1)));
-                    return;
-                }
                 
+                var idx;
+                if ((idx=s.indexOf(":"))!=-1) {
+                    var subkey = trim(s.substring(0,idx));
+                    if (idx && this.aliases[subkey]) {
+                        window[this.aliases[subkey]](trim(s.substring(idx+1)));
+                        return;
+                    }
+                }
                 if (this.current)
                     this.current.print(s);
                 else
