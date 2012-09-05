@@ -427,7 +427,7 @@ window.teacss = window.teacss || (function(){
                 var idx;
                 if ((idx=s.indexOf(":"))!=-1) {
                     var subkey = trim(s.substring(0,idx));
-                    if (idx && this.aliases[subkey]) {
+                    if (this.aliases && idx && this.aliases[subkey]) {
                         window[this.aliases[subkey]](trim(s.substring(idx+1)));
                         return;
                     }
