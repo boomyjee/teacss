@@ -43,7 +43,7 @@
                         js += "{func:"+teacss.parsed[im].js+"\n};";
                     }
                     
-                    js += "teacss.parsed["+JSON.stringify(imports[0])+"].func()";
+                    js += "teacss.parsed["+JSON.stringify(imports[0])+"].func();";
                     
                     files['/donut.min.js'] = js;
                     
