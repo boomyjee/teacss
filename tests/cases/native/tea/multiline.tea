@@ -1,0 +1,9 @@
+.test_mixin(params) {
+    color: @params.color;
+}
+
+body {
+    .test_mixin({
+        color:'red'
+    });
+}

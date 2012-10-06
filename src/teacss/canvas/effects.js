@@ -463,10 +463,10 @@ teacss.Canvas.effects = teacss.Canvas.effects || function() {
         context.drawImage(Canvas.defaultElement,0,0);
         
         if (doc.mozSetImageElement) {
-            tea.rule('background-image','-moz-element(#'+id+')');
+            tea.rule('background-image:-moz-element(#'+id+')');
             doc.mozSetImageElement(id,element);
         } else {
-            tea.rule('background-image','-webkit-canvas('+id+')');
+            tea.rule('background-image:-webkit-canvas('+id+')');
             context = doc.getCSSCanvasContext("2d",id,canvas.width,canvas.height);
             context.drawImage(element,0,0);
         }
