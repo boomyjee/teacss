@@ -1,7 +1,10 @@
 QUnit.start();
 QUnit.test('Native', function () {
     var samples = [
-        "multiline"
+        "multiline",
+        "namespace",
+        "js_script",
+        "js_append"
     ];
     
     var dir = "cases/native/";
@@ -11,20 +14,24 @@ QUnit.test('Native', function () {
     for (var test in samples) {
         q.defer(function(test,done){
             var source = dir+"tea/"+samples[test] + ".tea";
-            teacss.getFile(dir+"css/"+samples[test] + ".css",function(csssample){
+            
+            var ext = 'css';
+            var scope = 'Style';
+            
+            if (samples[test].substring(0,2)=="js") {
+                ext = "js";
+                scope = "Script";
+            }
+            
+            teacss.getFile(dir+ext+"/"+samples[test] + "." + ext,function(sample){
                 QUnit.start();
                 teacss.process(source,function(){
-                    teacss.tea.Style.get(function(css){
+                    teacss.tea[scope].get(function(code){
                         QUnit.start();
-                        if (css!=csssample) {
-                            var a = 0;
-                            var b = 100;
-                            console.debug(css.substr(a,b-a)==csssample.substr(a,b-a));
-                            console.debug(css.substr(a,b-a));
-                            console.debug(csssample.substr(a,b-a));
-                            QUnit.push(css==csssample,css,csssample,samples[test]);
+                        if (code!=sample) {
+                            QUnit.push(code==sample,code,sample,samples[test]);
                         } else {
-                            ok(css==csssample,samples[test]);
+                            ok(code==sample,samples[test]);
                         }
                         QUnit.stop();
                         done();
