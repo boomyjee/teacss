@@ -1,4 +1,5 @@
 $(".navbar,.subnav").addClass("fixed_fix");
+return;
 var form = ui.form("body",function(){
     ui.group('Bootstrap options'); {
         ui.fieldset("Hyperlinks"); {
