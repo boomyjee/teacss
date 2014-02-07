@@ -112,6 +112,7 @@ teacss.build = (function () {
         div.style.position = 'fixed';
         div.style.right = '3px';
         div.style.top = '3px';
+        div.style.zIndex = 100000;
         
         body.appendChild(div);
         
