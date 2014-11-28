@@ -323,6 +323,7 @@ teacss.Color = teacss.Color || function() {
         }
     }
     String.prototype.toHSL = function () { return Color.parse(this).toHSL(); }
+    String.prototype.toHSV = function () { return Color.parse(this).toHSV(); }
 
     for (var name in Color.functions) {
         teacss.functions[name] = function(func){

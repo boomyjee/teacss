@@ -9,8 +9,8 @@ function teacss($makefile,$css,$js,$dir,$dev) {
         }
         if (isset($_POST['css'])) {
             ob_get_clean();
-            if ($css) file_put_contents(realpath($dir)."/".basename($js),$_POST['js']);
-            if ($js) file_put_contents(realpath($dir)."/".basename($css),$_POST['css']);
+            if ($js) file_put_contents(realpath($dir)."/".basename($js),$_POST['js']);
+            if ($css) file_put_contents(realpath($dir)."/".basename($css),$_POST['css']);
             echo 'ok';
             die();
         }   
@@ -22,9 +22,16 @@ function teacss($makefile,$css,$js,$dir,$dev) {
             <script>teacss.update()</script>
             <script>
                 teacss.buildCallback = function (files) {
-                    teacss.jQuery.post(location.href,{css:files['/default.css'],js:files['/default.js']},function(data){
-                        alert(data);
-                    });
+                    var request = new XMLHttpRequest();
+                    request.open('POST', location.href, true);
+                    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                    request.onload = function() {
+                        if (request.status >= 200 && request.status < 400) alert(request.responseText);
+                    };                    
+                    request.send(
+                        "css="+encodeURIComponent(files['/default.css'])+"&"+
+                        "js="+encodeURIComponent(files['/default.js'])
+                    );
                 }
             </script>
         <?

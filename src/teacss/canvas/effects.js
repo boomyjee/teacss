@@ -314,7 +314,7 @@ teacss.Canvas.effects = teacss.Canvas.effects || function() {
             return Math.max(lo, Math.min(value, hi));
         }
         this.draw3D(gl.hueSaturationShader,{texture:this.getTexture()},{
-            hue: clamp(-1, hue, 1),
+            hue: hue,
             saturation: clamp(-1, saturation, 1)
         });
         this.setState('texture');
@@ -403,7 +403,7 @@ teacss.Canvas.effects = teacss.Canvas.effects || function() {
         return this;
     }
 
-    effects.preview = function () {
+    effects.renderPreview = function () {
         var gl = this.gl;
         this.getTexture().use(0);
         
@@ -432,46 +432,43 @@ teacss.Canvas.effects = teacss.Canvas.effects || function() {
             .uniforms({scale:[1,1]})
             .drawRect();
     }
+    
+    effects.preview = function () {
+        Canvas.defaultElement.width = this.width;
+        Canvas.defaultElement.height = this.height;
+        this.renderPreview();
+        
+        var doc = teacss.tea.document ? teacss.tea.document : document;
+        var element, context;
+        
+        element = doc.createElement("canvas");
+        context = element.getContext('2d');
 
-    var previewCanvasCache = {};
-    effects.background = function () {
-        var canvas = this;
+        element.width = this.width;
+        element.height = this.height;
+        
+        context.drawImage(Canvas.defaultElement,0,0);
+        
+        this.backgroundCanvas = element;
+        return this;
+    }
+    
+    effects.background = function (path) {
         var tea = teacss.tea;
         var selector = tea.Style.current.getSelector();
         var id = selector.replace(/[^A-Za-z_0-9-]/g,"_")+"_canvas";
         var doc = teacss.tea.document ? teacss.tea.document : document;
-        
-        Canvas.defaultElement.width = canvas.width;
-        Canvas.defaultElement.height = canvas.height;
-        canvas.preview();
-        
-        var element, context;
-        var cached = previewCanvasCache[id];
-        if (cached) {
-            element = cached.element;
-            context = cached.context;
-        } 
-        else {
-            element = doc.createElement("canvas");
-            context = element.getContext('2d');
-            previewCanvasCache[id] = { element: element, context : context }
-        }
-
-        element.width = canvas.width;
-        element.height = canvas.height;
-        
-        context.drawImage(Canvas.defaultElement,0,0);
+        var element = this.backgroundCanvas;
         
         if (doc.mozSetImageElement) {
             tea.rule('background-image:-moz-element(#'+id+')');
             doc.mozSetImageElement(id,element);
         } else {
             tea.rule('background-image:-webkit-canvas('+id+')');
-            context = doc.getCSSCanvasContext("2d",id,canvas.width,canvas.height);
+            context = doc.getCSSCanvasContext("2d",id,this.width,this.height);
             context.drawImage(element,0,0);
         }
-        return canvas;
+        return this;
     }
-    
     return effects;
 }()
