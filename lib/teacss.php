@@ -1,6 +1,6 @@
 <?
 
-function teacss($makefile,$css,$js,$dir,$dev) {
+function teacss($makefile,$css,$js,$dir,$dev,$teacss=false) {
     if ($dev) {
         if (isset($_REQUEST['remote'])) {
             ob_get_clean();
@@ -18,6 +18,9 @@ function teacss($makefile,$css,$js,$dir,$dev) {
         echo ob_get_clean();
         
         ?>
+            <? if ($teacss): ?>
+                <script src="<?=$teacss?>"></script>
+            <? endif ?>
             <script tea="<?=$makefile?>"></script>
             <script>teacss.update()</script>
             <script>
@@ -26,7 +29,10 @@ function teacss($makefile,$css,$js,$dir,$dev) {
                     request.open('POST', location.href, true);
                     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
                     request.onload = function() {
-                        if (request.status >= 200 && request.status < 400) alert(request.responseText);
+                        if (request.status >= 200 && request.status < 400) {
+                            console.debug(request.responseText);
+                            alert('done');
+                        }
                     };                    
                     request.send(
                         "css="+encodeURIComponent(files['/default.css'])+"&"+

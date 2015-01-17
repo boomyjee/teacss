@@ -106,6 +106,8 @@ teacss.build = (function () {
         var body = document.getElementsByTagName('body')[0];
         if (!body) return setTimeout(bodyLoaded,100);
         if (!teacss.buildCallback) return;
+        if (window.buildLoaded) return;
+        window.buildLoaded = true;
         
         var div = document.createElement('div');
         div.id = "teacss-build-panel";
@@ -114,13 +116,33 @@ teacss.build = (function () {
         div.style.top = '3px';
         div.style.zIndex = 100000;
         
+        var css = "";
+        css += "#teacss-build-panel { display: none; font-size: 12px !important; }";
+        css += "body:hover #teacss-build-panel { display: block; }";
+        css += "#teacss-build-panel > div { border:1px solid #555;padding:5px;margin:0;background:#333;color:#fff; }";
+        css += "#teacss-build-panel a { cursor:pointer;color:#ffa;padding:0;margin:0;background:transparent;border:none; text-decoration:none; }";
+        css += "#teacss-build-panel a:hover { text-decoration: underline; }";
+        css += "#teacss-build-panel pre  { display:inline;padding:0;margin:0;background:transparent;border:none; }";
+        
+        var node = document.createElement('style');
+        node.type = "text/css";
+        var rules = document.createTextNode(css);
+        if (node.styleSheet) {
+            node.styleSheet.cssText = rules.nodeValue;
+        } else {
+            node.innerHTML = "";
+            node.appendChild(rules);
+        }        
+
+        body.appendChild(node);
         body.appendChild(div);
         
         var html = "";
-        html += '<div style="border:1px solid #555;padding:5px;margin:0;background:#333;color:#fff;">';
+        html += '<div>';
         for (var s=0;s<teacss.sheets.length;s++) {
-            html += 'Build <a style="cursor:pointer;color:#ffa;padding:0;margin:0;background:transparent;border:none;" onclick="teacss.build.run('+s+')"><pre style="display:inline;padding:0;margin:0;background:transparent;border:none;">' 
-                + teacss.sheets[s].src + '</pre></a><br>'
+            html += 'Build <a onclick="teacss.build.run('+s+')"><pre style="">' 
+                + teacss.sheets[s].src + '</pre></a> '
+                + '<a onclick="this.parentNode.parentNode.removeChild(this.parentNode)">[close]</a><br>'
         }
         html += '</div>';
         
