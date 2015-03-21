@@ -21,7 +21,7 @@ function teacss($makefile,$css,$js,$dir,$dev,$teacss=false) {
             <? if ($teacss): ?>
                 <script src="<?=$teacss?>"></script>
             <? endif ?>
-            <script tea="<?=$makefile?>"></script>
+            <script tea="<?=$makefile?>" data-css-path="<?=dirname($css)?>" data-js-path="<?=dirname($js)?>"></script>
             <script>teacss.update()</script>
             <script>
                 teacss.buildCallback = function (files) {
@@ -33,10 +33,10 @@ function teacss($makefile,$css,$js,$dir,$dev,$teacss=false) {
                             console.debug(request.responseText);
                             alert('done');
                         }
-                    };                    
+                    };        
                     request.send(
-                        "css="+encodeURIComponent(files['/default.css'])+"&"+
-                        "js="+encodeURIComponent(files['/default.js'])
+                        "css="+encodeURIComponent(files['<?=dirname($css)?>/default.css'])+"&"+
+                        "js="+encodeURIComponent(files['<?=dirname($js)?>/default.js'])
                     );
                 }
             </script>

@@ -571,6 +571,7 @@ window.teacss = window.teacss || (function(){
         get: function (callback,filter) {
             var output = "";
             for (var i=0;i<this.rules.length;i++) output += this.rules[i].getOutput();
+            if (filter) output = filter(output,undefined);
             
             var appended = [];
             var q = queue(10);
@@ -737,7 +738,7 @@ window.teacss = window.teacss || (function(){
         for (var i = 0; i < links.length; i++) {
             var tea = links[i].getAttribute('tea');
             if (tea) {
-                sheets.push({src:teacss.path.absolute(tea)});
+                sheets.push({src:teacss.path.absolute(tea),element:links[i]});
             }
         }
         return sheets;

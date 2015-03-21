@@ -48,6 +48,10 @@ teacss.build = (function () {
             var q = teacss.queue(10);
             
             // Style
+            var rootStylePath = false;
+            if (options.stylePath && path.isAbsoluteOrData(options.stylePath)) {
+                rootStylePath = teacss.path.absolute(options.stylePath);
+            }            
             q.defer(function(done){
                 teacss.tea.Style.get(
                     function(css){
@@ -56,7 +60,8 @@ teacss.build = (function () {
                     },
                     function(css,href) {
                         return css.replace(/url\(['"]?([^'"\)]*)['"]?\)/g, function( whole, part ) {
-                            var rep = (!path.isAbsoluteOrData(part)) ? path.dir(path.clean(href)) + part : part;
+                            var rep = (!path.isAbsoluteOrData(part) && href!==undefined) ? path.dir(path.clean(href)) + part : part;
+                            if (rootStylePath) rep = path.relative(rep,rootStylePath);
                             return 'url('+rep+')';
                         });
                     }
@@ -98,8 +103,17 @@ teacss.build = (function () {
     }
         
     build.run = function (s) {
-        var url = teacss.sheets[s].src;
-        teacss.build(url,{callback:teacss.buildCallback});
+        var sheet = teacss.sheets[s];
+        var url = sheet.src;
+        
+        var scriptPath = sheet.element.getAttribute("data-js-path");
+        var stylePath = sheet.element.getAttribute("data-css-path");
+        
+        teacss.build(url,{
+            callback:teacss.buildCallback,
+            scriptPath: scriptPath || undefined,
+            stylePath: stylePath || undefined
+        });
     }
         
     var bodyLoaded = function () {
