@@ -11,7 +11,7 @@
         <meta charset="utf-8">
         
         <link tea="../src/build.tea">
-        <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+        <script src="//code.jquery.com/jquery-1.7.2.js"></script>
         
         <script src="../src/teacss/core.js"></script>
         <script src="../src/teacss/build/build.js"></script>
